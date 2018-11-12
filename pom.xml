@@ -5,8 +5,8 @@
 
 	<groupId>com.cc</groupId>
 	<artifactId>cc-test</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>1.ty.1.0-SNAPSHOT_${maven.build.timestamp}</version>
+	<packaging>war</packaging>
 
 	<name>cc-test</name>
 	<description>Demo project for Spring Boot</description>
@@ -36,19 +36,61 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--加上这tomcat启动器，就可以打成war-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+	    </dependency>
+		<!--fastjson-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
+		</dependency>
+		<!--dom4j-->
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
 	</dependencies>
-	<!--加上这个build打成的包为可执行包，在其他项目里不能引入，去掉这个打成的包是普通jar包可以在其他项目引用其中的类-->
+
 	<build>
-		<plugins>
+		<finalName>cc_test</finalName>
+		<resources>
+		<resource>
+			<directory>${project.basedir}/src/main/resources</directory>
+			<filtering>true</filtering>
+			<excludes>
+				<exclude>static/**</exclude>
+			</excludes>
+		</resource>
+		<resource>
+			<directory>${project.basedir}/src/main/resources</directory>
+			<filtering>false</filtering>
+			<includes>
+				<include>static/**</include>
+			</includes>
+		</resource>
+		</resources>
+		<!--加上这个build打成的包为可执行包，在其他项目里不能引入，去掉这个打成的包是普通jar包可以在其他项目引用其中的类-->
+		<!--<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+		</plugins>-->
 	</build>
 
 
