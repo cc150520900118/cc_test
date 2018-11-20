@@ -1,0 +1,44 @@
+person1:
+    lastName: hello
+    age: 18
+    boss: false
+    birth: 2017/12/12
+    maps: {k1: v1,k2: 12}
+    lists:
+      - lisi
+      - zhaoliu
+    dog:
+      name: 小狗
+      age: 12
+
+
+ThreadPool:
+ #核心线程数
+ corePoolSize: 30
+ #最大线程数
+ maxPoolSize: 200
+ #任务队列容量（阻塞队列）
+ queueCapacity: 10
+
+
+#yml 文档快的方式激活
+
+server:
+  port: 8081
+spring:
+  profiles:
+    active: prod
+
+---
+server:
+  port: 8083
+spring:
+  profiles: dev
+
+
+---
+
+server:
+  port: 8084
+spring:
+  profiles: prod
