@@ -80,7 +80,7 @@ public class HelloController {
                 //JSESSIONID tomcat生成的sessionid叫做jsessionid。
                 if ("JSESSIONID".equals(cookie.getName())) {
                     res=cookie.getValue();
-                    // c1 同域名同cookie名，不用path
+                    // c1 同域名同cookie名，不同path
                     javax.servlet.http.Cookie c1 = new javax.servlet.http.Cookie("JSESSIONID", "4444");
                     c1.setPath("/cc");
                     // c2 同域名同cookie名，同path，直接替换了JSESSIONID

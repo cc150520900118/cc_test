@@ -34,28 +34,39 @@ public class TreadFor {
         list.add("7");
         list.add("8");
         list.add("9");
-        TestThreadPool.m1(list);  
-        long et2 = System.currentTimeMillis();  
-        System.out.println("[1]耗时:"+(et2 - bt)+ "ms");  
-        //Thread thread = new Thread();
-        //long at = System.currentTimeMillis();
-        //TestThreadPool.m2();
-       // long et3 = System.currentTimeMillis();
-        //System.out.println("[2]耗时:"+(et3 - at)+ "ms");
-          
+        list.add("8");
+        list.add("9");
+        list.add("7");
+        list.add("8");
+        list.add("9");
+        TestThreadPool.m1(list);
+        //TestThreadPool.mm();
+        long et2 = System.currentTimeMillis();
+       System.out.println("[1]耗时:"+(et2 - bt)+ "ms");
+       // long at = System.currentTimeMillis();
+       // TestThreadPool.m2();
+      // long et3 = System.currentTimeMillis();
+       // System.out.println("[2]耗时:"+(et3 - at)+ "ms");
+
     }  
-  
+    //  缓存线程池    多线程
     public void m1( List<String> list) {
-        ExecutorService pool = Executors.newCachedThreadPool();
+        //Java通过Executors提供四种线程池，分别为：
+        //newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
+        //newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+        //newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。
+        //newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+
+        ExecutorService pool = Executors.newCachedThreadPool();//newCachedThreadPool可缓存线程池
         for (int i = 0; i < list.size(); i++) {
         	String str = list.get(i);
         	//System.out.println(list.get(i));
-            Runnable run = new Runnable() {  
+            Runnable run = new Runnable() {
                 public void run() {  
                     try {  
-                        new Thread().sleep(1000);
+                        new Thread().sleep(2000);
                         //模拟耗时操作
-                    	System.out.println("[1]" + Thread.currentThread().getName()+"----"+str);
+                    	System.out.println("[1]当前线程" + Thread.currentThread().getName()+"----"+str);
                     } catch (Exception e) {  
                     }  
                 }  
@@ -65,8 +76,33 @@ public class TreadFor {
 		}
         System.out.println("[1] done!");
         pool.shutdown();  
-    }  
-  
+    }
+
+    public void mm(){
+        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+        for (int i = 0; i < 10; i++) {
+            final int index = i;
+            try {
+                Thread.sleep(index * 100);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            cachedThreadPool.execute(new Runnable() {
+
+                @Override
+                public void run() {
+                    System.out.println(index+"当前线程"+Thread.currentThread().getName());
+                }
+            });
+        }
+}
+
+
+
+
+
+    //  main单独线程执行
     public void m2() { 
     	AtomicInteger connectionIds = new AtomicInteger(0);
         for (int index = 0; index < loopNum; index++) {  

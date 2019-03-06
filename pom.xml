@@ -152,6 +152,30 @@
 			<artifactId>xzxt_utils</artifactId>
 			<version>0.0.3</version>
 		</dependency>
+		<!--面向切面-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<!-- swagger生成接口API  启动SpringBoot项目，访问 http://localhost:8080/swagger-ui.html-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+
+		<!-- 接口API生成html文档 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<!-- 引入spring-data-solr-->
+	<!--	<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-solr</artifactId>
+		</dependency>-->
+
 	</dependencies>
 
 	<build>

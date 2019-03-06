@@ -29,13 +29,15 @@ spring:
   profiles:
     active: prod
 
+
+#配置1
 ---
 server:
   port: 8083
 spring:
   profiles: dev
 
-
+#配置2
 ---
 
 server:

@@ -14,6 +14,11 @@ public interface DepartmentMapper {
     @Delete("delete from department where id=#{id}")
     public int deleteDeptById(Integer id);
 
+
+    //   @Options(useGeneratedKeys = true, keyProperty = "instanceId", keyColumn = "instance_id")
+
+    //这个注解的意思就是，从instance_id这个字段里面把数据放到传入对象的instanceId成员变量里面。
+
     @Options(useGeneratedKeys = true,keyProperty = "id")
     @Insert("insert into department(department_name) values(#{departmentName})")
     public int insertDept(Department department);
