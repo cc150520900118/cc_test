@@ -1,4 +1,4 @@
-package com.cc.controller;
+package com.cc.filtercontroller;
 
 
 import com.cc.bean.Student;
@@ -20,20 +20,20 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 @Controller
-public class HelloController {
+public class HellofilterController {
     @Autowired
     private TestTask asyncTask;
 
     @ResponseBody
-    @RequestMapping("/hello")
+    @RequestMapping("/filterhello")
     public String hello() throws Exception {
         long starttime = System.currentTimeMillis();
         //Future<String> task1 = asyncTask.test1();
         //Future<String> task2 = asyncTask.test2(); //等待任务都执行完
         //Future<String> task3 = asyncTask.test3();
-        for (int i = 0; i <= 40; i++) {
-            asyncTask.doReturn(i);
-             System.out.println(asyncTask.doReturn(i).get());
+        for (int i = 0; i <= 30; i++) {
+            asyncTask.test2();
+            // System.out.println(ss);
         }
        /*  while(true){
              if(task1.isDone() && task2.isDone()){ break;
@@ -45,7 +45,7 @@ public class HelloController {
     }
 
     @ResponseBody
-    @RequestMapping("/hi")
+    @RequestMapping("/filterhi")
     public Map<String, Object> testAsyncReturn() throws ExecutionException, InterruptedException {
         long start = System.currentTimeMillis();
 
@@ -65,7 +65,7 @@ public class HelloController {
         return map;
     }
     @ResponseBody
-    @GetMapping("/cookie")
+    @GetMapping("/filtercookie")
     public String hello(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         Cookie[] cookies = httpServletRequest.getCookies();
         String res="";
@@ -82,10 +82,10 @@ public class HelloController {
                 if ("JSESSIONID".equals(cookie.getName())) {
                     res=cookie.getValue();
                     // c1 同域名同cookie名，不同path
-                    javax.servlet.http.Cookie c1 = new javax.servlet.http.Cookie("JSESSIONID", "4444");
+                    Cookie c1 = new Cookie("JSESSIONID", "4444");
                     c1.setPath("/cc");
                     // c2 同域名同cookie名，同path，直接替换了JSESSIONID
-                    javax.servlet.http.Cookie c2= new javax.servlet.http.Cookie("JSESSIONID", "5555");
+                    Cookie c2= new Cookie("JSESSIONID", "5555");
                     c2.setPath("/");
                     httpServletResponse.addCookie(c1);
                     httpServletResponse.addCookie(c2);//响应返回cookie*/
@@ -94,7 +94,7 @@ public class HelloController {
         }
         return res;
     }
-    @RequestMapping("/dd")
+    @RequestMapping("/filterdd")
     public String dd() throws ExecutionException, InterruptedException {
         return "form";
     }
@@ -104,14 +104,14 @@ public class HelloController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/failed")
+    @RequestMapping("/filterfailed")
     public Map<String, String> requestFailed(){
         Map<String, String> map = new HashMap<>();
         map.put("code", "-1");
         map.put("msg", "请求错误");
         return map;
     }
-    @RequestMapping("/success/info")
+    @RequestMapping("/filter/success/info")
     public Student userInfo(){
         Student student = new Student();
         student.setName("Yansir");

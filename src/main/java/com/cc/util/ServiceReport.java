@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  */
 @Component
 public class ServiceReport {
-    @Scheduled(cron = "0/2 * * * * *")
+    //@Scheduled(cron = "0/2 * * * * *")
     public void work() {
         //获取当前时间
         LocalDateTime localDateTime = LocalDateTime.now();

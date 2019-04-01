@@ -6,6 +6,7 @@
 	<groupId>com.cc</groupId>
 	<artifactId>cc-test</artifactId>
 	<version>1.ty.1.0-SNAPSHOT_${maven.build.timestamp}</version>
+	<!--1.打成war-->
 	<packaging>war</packaging>
 
 	<name>cc-test</name>
@@ -98,7 +99,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--加上这tomcat启动器，就可以打成war-->
+		<!--2.打成war  加上这tomcat启动器，就可以打成war-->
+		<!--3.增加Servletlnitializer-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -141,6 +143,13 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>10</version>
 		</dependency>
+		<!--MySQL驱动-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -170,33 +179,53 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.7.0</version>
 		</dependency>
+		<!-- 引入spring-boot-starter-data-jpa-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- 日志 -->
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- 时间转换工具-->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.3</version>
+		</dependency>
+
+
 		<!-- 引入spring-data-solr-->
-	<!--	<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-solr</artifactId>
-		</dependency>-->
+	<!--		<dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-solr</artifactId>
+            </dependency>-->
 
-	</dependencies>
+        </dependencies>
 
-	<build>
-		<finalName>cc_test</finalName>
-		<resources>
-		<resource>
-			<directory>${project.basedir}/src/main/resources</directory>
-			<filtering>true</filtering>
-			<excludes>
-				<exclude>static/**</exclude>
-			</excludes>
-		</resource>
-		<resource>
-			<directory>${project.basedir}/src/main/resources</directory>
-			<filtering>false</filtering>
-			<includes>
-				<include>static/**</include>
-			</includes>
-		</resource>
-		</resources>
-		<!--加上这个build打成的包为可执行包，在其他项目里不能引入，去掉这个打成的包是普通jar包可以在其他项目引用其中的类-->
+        <build>
+            <finalName>cc_test</finalName>
+            <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>static/**</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>static/**</include>
+                </includes>
+            </resource>
+            </resources>
+            <!--加上这个build打成的包为可执行包，在其他项目里不能引入，去掉这个打成的包是普通jar包可以在其他项目引用其中的类-->
 		<!--<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  *     url:"user/saveUser",
  *     dataType:"json",
  *     contentType:"application/json",        ------注意  @RequestBody   接收的是json字符串
- *     data:JSON.stringify(saveData),         JSON.stringify：将一个JavaScript值(对象或者数组)转换为一个 JSON字符串
+ *     data:JSON.stringify(saveDataAry),         JSON.stringify：将一个JavaScript值(对象或者数组)转换为一个 JSON字符串
  *     success:function(data){
  *
  *      }
