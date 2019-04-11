@@ -3,6 +3,9 @@ package com.cc.util;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
+import static com.cc.utls.Base64Util.xzxtdecode;
+import static com.cc.utls.Base64Util.xzxtencode;
+
 public class Base64Util {
     /**
      * base64 编码
@@ -48,5 +51,11 @@ public class Base64Util {
         System.out.println(encoderStr);
         String decoderStr = decoder(encoderStr);
         System.out.println(decoderStr);
+        //自定义的加密解密算法
+        String pwd = "10.143.136.148";
+        String encode = xzxtencode(pwd);
+        System.out.println(encode);
+        System.out.println(encode.length());
+        System.out.println(xzxtdecode(encode));
     }
 }
