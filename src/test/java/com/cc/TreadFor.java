@@ -39,14 +39,14 @@ public class TreadFor {
         list.add("7");
         list.add("8");
         list.add("9");
-        TestThreadPool.m1(list);
-        //TestThreadPool.mm();
+        //TestThreadPool.m1(list);
+        TestThreadPool.mm();
         long et2 = System.currentTimeMillis();
        System.out.println("[1]耗时:"+(et2 - bt)+ "ms");
-       // long at = System.currentTimeMillis();
-       // TestThreadPool.m2();
-      // long et3 = System.currentTimeMillis();
-       // System.out.println("[2]耗时:"+(et3 - at)+ "ms");
+        long at = System.currentTimeMillis();
+        TestThreadPool.m2();
+       long et3 = System.currentTimeMillis();
+        System.out.println("[2]耗时:"+(et3 - at)+ "ms");
 
     }  
     //  缓存线程池    多线程
@@ -64,10 +64,10 @@ public class TreadFor {
             Runnable run = new Runnable() {
                 public void run() {  
                     try {  
-                        new Thread().sleep(2000);
+                        //new Thread().sleep(2000);
                         //模拟耗时操作
-                    	System.out.println("[1]当前线程" + Thread.currentThread().getName()+"----"+str);
-                    } catch (Exception e) {  
+                    	System.out.println("[1111]当前线程" + Thread.currentThread().getName()+"----"+str);
+                    } catch (Exception e) {
                     }  
                 }  
             }; 
@@ -83,7 +83,7 @@ public class TreadFor {
         for (int i = 0; i < 10; i++) {
             final int index = i;
             try {
-                Thread.sleep(index * 100);
+                //Thread.sleep(index * 100);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -97,10 +97,6 @@ public class TreadFor {
             });
         }
 }
-
-
-
-
 
     //  main单独线程执行
     public void m2() { 

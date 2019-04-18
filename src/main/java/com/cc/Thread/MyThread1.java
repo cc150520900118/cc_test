@@ -29,11 +29,16 @@ class MyThread1 implements Runnable{
         // TODO Auto-generated method stub
         //设计三个线程
         MyThread1 mt = new MyThread1();
-        Thread t1 = new Thread(mt,"一号窗口");
-        Thread t2 = new Thread(mt,"二号窗口");
-        Thread t3 = new Thread(mt,"三号窗口");
-        t1.start();
-        t2.start();
-        t3.start();
+        for (int i=0 ;i<4;i++){
+            //MyThread1 mt = new MyThread1();
+            Thread t1 = new Thread(mt,i+"号窗口");
+            t1.start();
+        }
+        //Thread t1 = new Thread(mt,"一号窗口");
+        //Thread t2 = new Thread(mt,"二号窗口");
+        //Thread t3 = new Thread(mt,"三号窗口");
+        //t1.start();
+        //t2.start();
+        //t3.start();
     }
 }
