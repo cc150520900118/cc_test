@@ -18,8 +18,13 @@ public class newCachedThreadPool implements Runnable{
     private int ticket =500;
     @Override
     public void run() {
-        for(int i =0;i<1000;i++){
+        for(int i =0;i<100;i++){
             if(this.ticket>0){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println(Thread.currentThread().getName()+"卖票---->"+(this.ticket--));
                 System.out.println("[1111]当前线程" + Thread.currentThread().getName()+"----");
             }
