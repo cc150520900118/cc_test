@@ -1,6 +1,7 @@
 package com.cc.controller;
 
 import com.cc.bean.UserBean;
+import com.cc.bean.UserBean1;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,14 @@ public class FromDemo {
         System.out.println(user.toString());
         return user;
     }
+    @RequestMapping("/m3")
+    @ResponseBody
+    public UserBean1 test3(UserBean1 user){
+        System.out.println("ok");
+        System.out.println(user.toString());
+        return user;
+    }
+
     /**
      *
      * @Description: 访问表单的jsp

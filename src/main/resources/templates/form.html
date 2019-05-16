@@ -10,39 +10,64 @@
     年    龄: <input type="text" name="age"/><br>
     兴    趣: <input type="checkbox" name="sport" value="1">足球
     <input type="checkbox" name="sport" value="2">篮球<br>
-    <a onclick="submit()">提交(后台直接对象接收)</a>
-    <a onclick="submit1()">提交(后台@RequestBody接收)</a>
+    <a onclick="submit1()">提交(表单提交，后台直接对象接收)</a>
+    <a onclick="submit2()">提交(对象提交，后台直接对象接收)</a>
+    <a onclick="submit3()">提交(后台@RequestBody接收)</a>
 </form>
 <script>
-    function submit() {
+    //1、表单提交
+    function submit1() {
         console.info($('#form1').serialize());   //name=2323&age=23232&sport=1  字符串
         console.info($('#form1').serializeArray());
          // "[{name: "name", value: "565"}," "{name: "age", value: "5656"}"{name: "sport", value: "1"}"]"
-
         $.ajax({
             method : 'post',
             url : 'mvc/m1',
             dateType:'json',
             //两种方式后台都可以接收到
-            data : $('#form1').serializeArray(), //后台直接接收实体bean  数组类型json对象   适用表单提交
-            //data :$('#form1').serialize(),     // json字符串 name=2323&age=23232&sport=1
+            //data : $('#form1').serializeArray(), //后台直接接收实体bean  数组类型json对象   适用表单提交
+            data :$('#form1').serialize(),     // json字符串 name=2323&age=23232&sport=1
             success : function(data) {
                 console.info(data)
             }
         })
     }
-    function submit1() {
+    //2、json对象提交
+    function submit2() {
+        console.info($('#form1').serialize());   //name=2323&age=23232&sport=1
+        console.info($('#form1').serializeArray());
+        var data=$('#form1').serializeArray();
+        var saveDataAry=[];
+        //json对象
+        var data1={"name":"网站", "age":3,"cc":"qqq"}
+        //var data1={"value":"A1507810500002017010105", "type":"yazc"}
+        debugger;
+        $.ajax({
+            method : 'post',
+            url : 'mvc/m3',
+            dateType:'json',
+            data :data1,
+            success : function(data) {
+                console.info(data)
+            }
+        })
+    }
+
+    //3、json对象提交  转json 对象
+    function submit3() {
         console.info($('#form1').serialize());   //name=2323&age=23232&sport=1
         console.info($('#form1').serializeArray());
         var data=$('#form1').serializeArray();
         var saveDataAry=[];
         //json对象
         var data1={"name":"网站", "age":3, "sport":[ "1", "2"]}
+        var data1={"value":"A1507810500002017010105", "type":"yazc"}
         $.ajax({
             method : 'post',
-            url : 'mvc/m2',
+            //url：'mvc/m2',
+            url : 'http://localhost:8050/ajxx',
             dateType:'json',
-            contentType:"application/json",   //后台@RequestBody接收  就是接收json字符串
+            contentType:"application/json",   //后台@RequestBody接收  就是接收json字符串  使用contentType: “application/json”则data只能是json字符串
             data :JSON.stringify(data1),     //  将json对象转为json字符串
             success : function(data) {
                 console.info(data)
