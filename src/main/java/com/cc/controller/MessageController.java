@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.cc.bean.MessagePojo;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by changc on 2019/3/6.
@@ -86,5 +83,15 @@ public class MessageController {
     public String send_message(@RequestBody MessagePojo pojo) throws Exception {
         log.info("执行了controller.send_message方法");
         return JSON.toJSONString(pojo);
+    }
+
+    @ApiOperation(value = "测试接口", notes = "插入map数据")
+    @GetMapping("select")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="name",value="用户名",dataType="string", paramType = "query",example="xingguo"),
+            @ApiImplicitParam(name = "input", value = "接收参数的意义描述", paramType = "body", dataType = "demo«ArrayList«demo1»»", required = true),
+            @ApiImplicitParam(name="id",value="用户id",dataType="string", paramType = "query")})
+    public void select1(String name,String id){
+
     }
 }
