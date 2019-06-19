@@ -54,7 +54,7 @@ public class ThreadPoolTool1<T> {
             if (i < (runSize - 1)){
                 startIndex = i * singleCount;
                 endIndex = (i + 1) * singleCount;
-                newList = list.subList(startIndex,endIndex);
+                newList = list.subList(startIndex,endIndex);// //从fromIndex（包含），到toIndex（不包含）
             }else {
                 startIndex = i * singleCount;
                 endIndex = listSize;

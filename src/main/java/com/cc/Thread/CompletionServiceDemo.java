@@ -16,25 +16,25 @@ import java.util.concurrent.*;
 public class CompletionServiceDemo
 {
 
-    public static void main(String[] args) throws InterruptedException,
+  /*  public static void main(String[] args) throws InterruptedException,
             ExecutionException
     {
-        /**
+        *//**
          * 内部维护11个线程的线程池
-         */
-        ExecutorService exec = Executors.newFixedThreadPool(11);
-        /**
+         *//*
+        //ExecutorService exec = Executors.newFixedThreadPool(11);
+        *//**
          * 容量为10的阻塞队列
-         */
+         *//*
         final BlockingQueue<Future<Integer>> queue = new LinkedBlockingDeque<Future<Integer>>(
                 10);
         //实例化CompletionService
-        final CompletionService<Integer> completionService = new ExecutorCompletionService<Integer>(
-                exec, queue);
+      //  final CompletionService<Integer> completionService = new ExecutorCompletionService<Integer>(
+               // exec, queue);
 
-        /**
+        *//**
          * 模拟瞬间产生10个任务，且每个任务执行时间不一致
-         */
+         *//*
         for (int i = 0; i < 10; i++)
         {
             completionService.submit(new Callable<Integer>()
@@ -51,9 +51,9 @@ public class CompletionServiceDemo
             });
         }
 
-        /**
+        *//**
          * 立即输出结果
-         */
+         *//*
         for (int i = 0; i < 10; i++)
         {
             try
@@ -72,6 +72,6 @@ public class CompletionServiceDemo
 
         exec.shutdown();
 
-    }
+    }*/
 
 }

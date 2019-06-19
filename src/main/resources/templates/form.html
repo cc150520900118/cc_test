@@ -20,7 +20,7 @@
         console.info($('#form1').serialize());   //name=2323&age=23232&sport=1  字符串
         console.info($('#form1').serializeArray());
          // "[{name: "name", value: "565"}," "{name: "age", value: "5656"}"{name: "sport", value: "1"}"]"
-        $.ajax({
+     /*   $.ajax({
             method : 'post',
             url : 'mvc/m1',
             dateType:'json',
@@ -29,6 +29,15 @@
             data :$('#form1').serialize(),     // json字符串 name=2323&age=23232&sport=1
             success : function(data) {
                 console.info(data)
+            }
+        })*/
+        $.ajax({
+            method : 'post',
+            url : 'http://localhost:8051/cardinfos',
+            dateType:'json',
+            data :{"zh":"A1506251700002017010003"},     //  将json对象转为json字符串
+            success : function(data) {
+                console.info(data);
             }
         })
     }
@@ -62,6 +71,10 @@
         //json对象
         var data1={"name":"网站", "age":3, "sport":[ "1", "2"]}
         var data1={"value":"A1507810500002017010105", "type":"yazc"}
+
+        //contentType 主要设置你发送给服务器的格式，dataType设置你收到服务器数据的格式。
+        //1.JQ得contentType默认是application/x-www-form-urlencoded，这种方式数据格式得特点name=value中间用&链接，
+        //2.转义，如果用application/json这种方式传输，标准得json格式，不用考虑转义问题了，直接发送过去就可以使用，
         $.ajax({
             method : 'post',
             //url：'mvc/m2',
