@@ -10,7 +10,7 @@ public class ThreadText {
     public static void main(String[] agrs){
         long start = System.currentTimeMillis();
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             list.add("hello"+i);
         }
         //System.out.println("执行开始");
@@ -18,9 +18,7 @@ public class ThreadText {
         tool.setCallBack(new LatchThreadPoolTool.CallBack<String>() {//实现返回值
             @Override
             public void method(List<String> list) {//返回值
-                for (int i = 0; i < list.size(); i++) {
-                   System.out.println(Thread.currentThread().getName()+"------"+list.get(i)+" ");
-                }
+
             }
         });
         try {

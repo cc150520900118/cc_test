@@ -22,13 +22,21 @@ public abstract class MyThread<T> implements Runnable{
     public void run() { //里面批量是先全部跑完
         try {
             //执行程序
-            ywmethod(list);
-            begin.await();//阻塞
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }finally {
-            //计数器减一
-            end.countDown();//释放
+           // ywmethod(list);
+            int t=0;
+           // while (t< list.size()){
+                for (int i = 0; i < list.size(); i++) {//未保证这个数据全部执行完 1、加休眠  2、再加锁
+                    System.out.println(Thread.currentThread().getName()+"------"+list.get(i)+" ");
+                    t++;
+                }
+         //   }
+            //begin.await();
+            end.countDown();
+            System.out.println(" No." + end.getCount() + " end");
+        }  finally {
+            // 每个选手到达终点时，end就减一
+           // end.countDown();
+           // System.out.println(" No." + end.getCount() + " end");
         }
     }
 }

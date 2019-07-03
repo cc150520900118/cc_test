@@ -43,7 +43,7 @@ public class ClassTest<T> {
 	}
 
 	//实例方法属于对象，通过对象调用，通过ClassTest<Integer>创建对象的时候，就确定了T的类型为Integer
-	private   void print(List<T> lists) {
+	private  void print(List<T> lists) {
 		for (T o : lists) {
 			System.out.println(o);
 		}

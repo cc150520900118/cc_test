@@ -21,7 +21,9 @@ public class CollectionTest {
 		sets.add(2);
 		sets.add(3);
 		sets.add(4);
-		sets.add(null);//这里存入两个null  但是也是会出现一个null
+		sets.add(4);
+		sets.add(4);
+		sets.add(null);//这里存入两个null  但是也是会出现一个null。9
 		sets.add(null);
 		Iterator<Integer> iterator = sets.iterator();//迭代器
 		while (iterator.hasNext()) {
@@ -39,6 +41,7 @@ public class CollectionTest {
 		maps.put(1, "张三");
 		maps.put(2, "李四");
 		maps.put(3, "王麻子");
+		maps.put(3, "王麻子22");
 		
 		Set<Entry<Integer,String>>   entries= maps.entrySet();
 		//Entry<Integer, String> ：表示集合中元素类型    entry:集合中每一个元素的代称   entries：表示你要遍历的集合

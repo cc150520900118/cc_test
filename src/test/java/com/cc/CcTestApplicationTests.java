@@ -24,6 +24,12 @@ public class CcTestApplicationTests {
 	Person1 person2;
 	@Autowired
 	ApplicationContext ioc;
+	@Autowired
+	private Car car;
+
+	@Autowired
+	private Driver driver;
+
 	@Test
 	public void contextLoads() throws FileNotFoundException {
 		//读取项目路径
@@ -72,4 +78,14 @@ public class CcTestApplicationTests {
 		boolean b = ioc.containsBean("helloService02");
 		System.out.println("b==========="+b);
 	}
+
+	/**
+	 * 从上面的结果可以发现使用Configuration时在driver和spring容器之中的是同一个对象，而使用Component时是不同的对象。
+	 */
+	@Test
+	public void contextLoads2() {
+		boolean result = driver.getCar() == car;
+		System.out.println(result ? "同一个car" : "不同的car");
+	}
+
 }

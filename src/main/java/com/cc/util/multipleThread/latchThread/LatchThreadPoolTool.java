@@ -19,7 +19,7 @@ public class LatchThreadPoolTool<T> {
     //操作的数据集
     private List<T> list;
     //计数器
-    private CountDownLatch begin,end;
+    private  CountDownLatch begin1,end;
     //线程池
     private ExecutorService executorService;
     //回调
@@ -47,9 +47,9 @@ public class LatchThreadPoolTool<T> {
     public void excute() throws InterruptedException {
         System.out.println("主线程阻塞,等待所有子线程执行完成");
         //创建定长线程迟
-        executorService = Executors.newFixedThreadPool(runSize);
-        begin = new CountDownLatch(1);
-        end = new CountDownLatch(runSize);
+        executorService = Executors.newFixedThreadPool(runSize-1);
+      //  begin = new CountDownLatch(1);
+        end = new CountDownLatch(runSize-1);
         //创建线程
         int startIndex = 0;
         int endIndex = 0;
@@ -70,15 +70,19 @@ public class LatchThreadPoolTool<T> {
                 }
             }
             //创建线程类处理数据
-            MyThread<T> myThread = new MyThread(newList, begin, end) {
+            begin1=new CountDownLatch(newList.size()-1);
+            MyThread<T> myThread = new MyThread(newList, begin1, end) {
                 @Override
                 public void ywmethod(List list) {
-                    try {
-                        Thread.sleep(5000);
+                   /* try {
+                        for (int i = 0; i < list.size(); i++) {
+                            System.out.println(Thread.currentThread().getName()+"------"+list.get(i)+" ");
+                        }
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }
-                    System.out.println(Thread.currentThread().getName()+"------"+list.size()+" ");
+                    }*/
+                    //System.out.println(Thread.currentThread().getName()+"------"+list.size()+" ");
                     callBack.method(list);//接口
                 }
             };
@@ -86,10 +90,8 @@ public class LatchThreadPoolTool<T> {
             executorService.execute(myThread);
         }
         //计数器减一  // 完成业务处理过程，计数器-1
-        System.out.println("游戏开始22222开始");
-        begin.countDown();
+        //begin.countDown();
         end.await();//await() 方法在倒计数为0之前会阻塞当前线程.
-        System.out.println("游戏结束333333");
         executorService.shutdown();
     }
 }

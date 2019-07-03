@@ -30,10 +30,10 @@ public class CountDownLatchTest {
             // 开始的倒数锁
             final CountDownLatch begin = new CountDownLatch(1);
             // 结束的倒数锁
-            final CountDownLatch end = new CountDownLatch(10);
+            final CountDownLatch end = new CountDownLatch(100);
             // 十名选手
-            ExecutorService executorService = Executors.newFixedThreadPool(10);
-            for (int i = 1; i <= 10; i++) {
+            ExecutorService executorService = Executors.newFixedThreadPool(100);
+            for (int i = 1; i <= 100; i++) {
                 final int no = i;
                 Runnable run = new Runnable() {
                     @Override
@@ -41,14 +41,16 @@ public class CountDownLatchTest {
                         try {
                             // 如果当前计数为零，则此方法立即返回。
                             // 等待
-                            begin.await();
+                           // begin.await();
                             Thread.sleep((long) (Math.random() * 10000L));
-                            System.out.println(" No." + no + " arrived");
+                            //System.out.println(" No." + no + " arrived");
+                         //   System.out.println(" No." + begin.getCount() + " arrived");
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         } finally {
                             // 每个选手到达终点时，end就减一
                             end.countDown();
+                            System.out.println(" No." + end.getCount() + " end");
                         }
                     }
                 };
@@ -57,7 +59,7 @@ public class CountDownLatchTest {
 
             System.out.println("Game start...");
             // begin减一，开始游戏
-            begin.countDown();
+          //  begin.countDown();
             try {
                 end.await();
                 // 等待end变为0，即所有选手到达终点
