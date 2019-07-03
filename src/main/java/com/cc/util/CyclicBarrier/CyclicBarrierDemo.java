@@ -31,13 +31,55 @@ public class CyclicBarrierDemo {
             try {
                 //Thread.sleep(1000);
                 //开启多线程任务数据入库
+                long startTime = System.currentTimeMillis();
                 CountDownLatch latch = new CountDownLatch(3);
                 ExecutorService executorService = Executors.newFixedThreadPool(10);
+                System.out.println(name+"任务开始入库========================");
                 for(int i = 0; i < latch.getCount(); i++){
                     executorService.execute(new SaveThread(latch,name));
                 }
-                latch.await();
-                System.out.println(name+"任务已完成入库");
+                //latch.await();
+                latch.await(1,TimeUnit.SECONDS);//设置超时时间，设置了1秒   提前让主线程释放出来，继续执行下面的代码，执行完成后子线程再开始执行
+
+
+//                任务2发送
+//                任务1发送
+//                任务3发送
+//                任务4发送
+//                任务2任务开始入库========================
+//                任务3任务开始入库========================
+//                任务4任务开始入库========================
+//                任务1任务开始入库========================
+//                超时时间===========1003
+//                超时时间===========1003
+//                超时时间===========1003
+//                任务4任务已完成入库========================
+//                超时时间===========1003
+//                任务2任务已完成入库========================
+//                任务3任务已完成入库========================
+//                任务1任务已完成入库========================
+//                -------执行战法----------
+//                任务1执行战法完成
+//                任务4执行战法完成
+//                任务3执行战法完成
+//                任务2执行战法完成
+//                战法推算出结果
+//                任务2 数据入库,所使用的时间为 1.763s
+//                任务2 数据入库,所使用的时间为 1.709s
+//                任务1 数据入库,所使用的时间为 1.882s
+//                任务1 数据入库,所使用的时间为 2.471s
+//                任务4 数据入库,所使用的时间为 1.069s
+//                任务2 数据入库,所使用的时间为 2.274s
+//                任务4 数据入库,所使用的时间为 1.157s
+//                任务4 数据入库,所使用的时间为 2.301s
+//                任务3 数据入库,所使用的时间为 1.234s
+//                任务1 数据入库,所使用的时间为 1.574s
+//                任务3 数据入库,所使用的时间为 2.393s
+//                任务3 数据入库,所使用的时间为 2.586s
+
+                long endTime=System.currentTimeMillis();
+                System.out.println("超时时间==========="+(endTime - startTime));
+                System.out.println(name+"任务已完成入库========================");
                 try {
                     cb.await();//拦截线程
                 } catch (BrokenBarrierException e) {
@@ -68,7 +110,7 @@ public class CyclicBarrierDemo {
             try {
                 Random rand = new Random();
                 int randomNum = rand.nextInt((3000 - 1000) + 1) + 1000;//产生1000到3000之间的随机整数
-                Thread.sleep(randomNum);
+                Thread.sleep(5000);
                 System.out.println(name+" 数据入库,所使用的时间为 "+((double)randomNum/1000)+"s");
                 latch.countDown();
             } catch (InterruptedException e) {
